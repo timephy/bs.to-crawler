@@ -11,7 +11,7 @@ A web crawler that extracts video urls from [bs.to](https://bs.to) in bulk.
 ## Getting started
 
 1. Visit [bs.to](https://bs.to) and select your desired series (with season and language). Copy the URL in the top bar of your browser (Should be of this form: `http://bs.to/serie/<series>/<season>/<language>`).
-2. Run the program in the command-line: `python3.8 main.py [URL]`
+2. Run the program in the command-line: `python3.8 . [URL]`
 3. Get video links from the output file!
 
 ## Disclaimer
