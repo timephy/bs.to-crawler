@@ -1,18 +1,27 @@
 # bs.to-crawler
 A web crawler that extracts video urls from [bs.to](https://bs.to) in bulk.
 
+
 ## Requirements
 
 - python3.8 https://www.python.org/downloads/
 - chromedriver https://chromedriver.chromium.org
 - beautifulsoup4 `pip3.8 install beautifulsoup4`
 - selenium `pip3.8 install selenium`
+- requests `pip3.8 install requests`
+
 
 ## Getting started
 
-1. Visit [bs.to](https://bs.to) and select your desired series (with season and language). Copy the URL in the top bar of your browser (Should be of this form: `http://bs.to/serie/<series>/<season>/<language>`).
+1. Visit [bs.to](https://bs.to) and select your desired series (with season and language). Copy the URL in the top bar of your browser (Should be of this form: `http://bs.to/serie/<series>/<season>/<language>`, e.g. `https://bs.to/serie/Downton-Abbey/1/en`).
 2. Run the program in the command-line: `python3.8 . [URL]`
 3. Get video links from the output file!
+
+
+## How it works
+
+This tool uses selenium to parse and query html. It uses chromedriver to control a Chrome browser instance. This simulates a real user and browser. Conveniently this also allows *you* to solve the CAPTCHAs.
+
 
 ## Disclaimer
 
