@@ -1,19 +1,12 @@
 import bs_to
 from host import vivo_sx
-import urllib3.exceptions
 import requests
 import time
 import sys
 
-import signal
-
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
-SLEEP_TIME = 1
+SLEEP_TIME = 0.5
 SUPPORTED_HOSTS = ["vivo"]
 
 # season_url = input("The URL of the series: ")
@@ -43,11 +36,11 @@ def select_host_name(host_names):
     host_names = list(filter(lambda host: host in SUPPORTED_HOSTS, host_names))
     return host_names[0]  # for testing: auto-select first host
     while True:
-        inp = input(f"Select host ({host_names}): ")
+        inp = input(f"> Select host ({host_names}): ")
         if inp in host_names:
             return inp
         else:
-            print("Selected host is not valid.")
+            print("Error: Selected host is not valid.")
 
 
 def main(season_url):
@@ -115,13 +108,13 @@ def main(season_url):
     #     # driver.quit()
     # signal.signal(signal.SIGINT, interrupted)
 
-    outputs = [("file_name", "video_url")]
+    outputs = []
     for episode, bs_url in episodes_and_bs_urls_to_get:
         time.sleep(SLEEP_TIME)
         episode_str = str(episode["id"]).zfill(2)
+        episode_title = episode["title"]
         print()
-        print(
-            f"""# S{season_str}E{episode_str}: {episode["title"]} ({bs_url})""")
+        print(f"""# S{season_str}E{episode_str}: {episode_title} ({bs_url})""")
 
         # Get host url from bs.to
         host_url = bs_to.driver(driver, base_url + "/" + bs_url)
@@ -131,25 +124,36 @@ def main(season_url):
         video = vivo_sx.driver(driver, host_url)
         video_url = video["url"]
         print(f"→ {video_url=}")
-        # (source["src"], source["type"], source["size"])
 
         # File name
-        quality_str = str(video["size"])
+        quality_str = video["size"]
         file_format = video["type"].split("/")[1]
-        file_name = f"""{series_title} - S{season_str}E{episode_str} - {episode["title"]} - {quality_str}p.{file_format}"""
+        file_name = f"{series_title} - S{season_str}E{episode_str} - {episode_title} - {quality_str}p.{file_format}"
         print(f"→ {file_name=}")
 
         outputs.append((file_name, video_url))
 
-    # Write outputs to file
-    output_file_name = f"{series_title}.csv"
+    # Data to file
+    output_file_name = f"{series_title} - S{season_str}.csv"
     output_file = open(output_file_name, "w")
+    output_file.write(", ".join(("file_name", "video_url")) + "\n")
     for output in outputs:
         output_file.write(", ".join(output) + "\n")
     output_file.close()
 
+    # ffmpeg script to file
+    ffmpeg_file_name = f"Download {series_title} - S{season_str}.sh"
+    ffmpeg_file = open(ffmpeg_file_name, "w")
+    video_output_dir = f"{series_title}/S{season_str}"
+    ffmpeg_file.write(f"mkdir -p \"{video_output_dir}\"\n")
+    for output in outputs:
+        ffmpeg_file.write(
+            f"ffmpeg -i {output[1]} \"{video_output_dir}/{output[0]}\"" + "\n")
+    ffmpeg_file.close()
+
     print()
-    print(f"→ Output file: {output_file_name}")
+    print(f"→ Data file: {output_file_name}")
+    print(f"→ Download script: {ffmpeg_file_name}")
     print("Done.")
 
     # raise Exception()
