@@ -21,16 +21,16 @@ A web crawler that extracts video urls from [bs.to](https://bs.to) in bulk.
 
 ## Attention
 
-Currently on host [vivo.sx](https://vivo.sx) is supported!
+Currently only one host ([vivo.sx](https://vivo.sx)) is supported!
 
 
 ## How it works
 
-This tool uses selenium to parse and query html. It uses chromedriver to control a Chrome browser instance. This simulates a real user and browser. Conveniently this also allows *you* to solve the CAPTCHAs.
+This tool uses selenium to parse and query html. It uses chromedriver to control a Chrome browser instance. This simulates a real user and browser. Conveniently this also allows **you** to solve the CAPTCHAs.
 
 
 ## Disclaimer
 
-This tool does, at no point in time, store, stream or use copyrighted material - it only handles urls.
+This tool does **not** store, stream or use copyrighted material - it only handles URLs.
 
 Use of this tool is at each users own risk. Under no circumstances shall the developer(s) be liable for and indirect, incidental, consequential, special or exemplary damages arising out of the services this tool provides.
