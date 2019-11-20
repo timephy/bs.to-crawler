@@ -10,8 +10,8 @@ SLEEP_TIME = 0.5
 SUPPORTED_HOSTS = ["vivo"]
 
 # season_url = input("The URL of the series: ")
-season_url = sys.argv[1] if len(
-    sys.argv) > 1 else "https://bs.to/serie/Downton-Abbey/1/en"
+assert len(sys.argv) > 1, "Error: No URL provided."
+season_url = sys.argv[1]
 season_url_parts = season_url.split("/")
 
 assert len(season_url_parts) == 7
@@ -88,9 +88,11 @@ def main(season_url):
 
     episodes_and_bs_urls_to_get = []
     for episode in episodes:
-        bs_url = dict(episode["hosts"])[selected_host_name]
-        if bs_url is not None:
-            episodes_and_bs_urls_to_get.append((episode, bs_url))
+        hosts = dict(episode["hosts"])
+        if selected_host_name in hosts:
+            bs_url = hosts[selected_host_name]
+            if bs_url is not None:
+                episodes_and_bs_urls_to_get.append((episode, bs_url))
 
     # Browser
     """
