@@ -9,7 +9,7 @@ A web crawler that extracts video urls from [bs.to](https://bs.to) in bulk.
 - beautifulsoup4 `pip3.8 install beautifulsoup4`
 - selenium `pip3.8 install selenium`
 - requests `pip3.8 install requests`
-- ffmpeg http://www.ffmpeg.org (only for downloading)
+- ffmpeg http://www.ffmpeg.org (only for downloading the videos)
 
 
 ## Getting started
