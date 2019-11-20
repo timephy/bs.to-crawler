@@ -19,6 +19,11 @@ A web crawler that extracts video urls from [bs.to](https://bs.to) in bulk.
 3. Get video links from the output file(s)!
 
 
+## Attention
+
+Currently on host [vivo.sx](https://vivo.sx) is supported!
+
+
 ## How it works
 
 This tool uses selenium to parse and query html. It uses chromedriver to control a Chrome browser instance. This simulates a real user and browser. Conveniently this also allows *you* to solve the CAPTCHAs.
