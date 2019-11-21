@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -67,7 +68,7 @@ def driver(driver, url):
                 (By.CSS_SELECTOR, ".hoster-player > a")))
             print("CAPTCHA completed.")
             break  # break out of loop
-        except:
+        except TimeoutException:
             pass
 
     return get_host_url(driver.page_source)
