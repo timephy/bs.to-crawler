@@ -143,7 +143,7 @@ def main(season_url):
         output_file.write(", ".join(output) + "\n")
     output_file.close()
 
-    # ffmpeg script to file
+    # wget script to file
     wget_file_name = f"Download {series_title} - S{season_str}.sh"
     wget_file = open(wget_file_name, "w")
     video_output_dir = f"{series_title}/S{season_str}"
