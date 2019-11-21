@@ -144,18 +144,18 @@ def main(season_url):
     output_file.close()
 
     # ffmpeg script to file
-    ffmpeg_file_name = f"Download {series_title} - S{season_str}.sh"
-    ffmpeg_file = open(ffmpeg_file_name, "w")
+    wget_file_name = f"Download {series_title} - S{season_str}.sh"
+    wget_file = open(wget_file_name, "w")
     video_output_dir = f"{series_title}/S{season_str}"
-    ffmpeg_file.write(f"mkdir -p \"{video_output_dir}\"\n")
+    wget_file.write(f"mkdir -p \"{video_output_dir}\"\n")
     for output in outputs:
-        ffmpeg_file.write(
-            f"ffmpeg -i {output[1]} \"{video_output_dir}/{output[0]}\"" + "\n")
-    ffmpeg_file.close()
+        wget_file.write(
+            f"wget {output[1]} -O \"{video_output_dir}/{output[0]}\"" + "\n")
+    wget_file.close()
 
     print()
     print(f"→ Data file: {output_file_name}")
-    print(f"→ Download script: {ffmpeg_file_name}")
+    print(f"→ Download script: {wget_file}")
     print("Done.")
 
     # raise Exception()
