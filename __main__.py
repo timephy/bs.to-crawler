@@ -120,18 +120,18 @@ def main(season_url):
 
         # Get host url from bs.to
         host_url = bs_to.driver(driver, base_url + "/" + bs_url)
-        print(f"→ {host_url=}")
+        print(f"→ Host URL: {host_url}")
 
         # Get video url from host
         video = vivo_sx.driver(driver, host_url)
         video_url = video["url"]
-        print(f"→ {video_url=}")
+        print(f"→ Video URL: {video_url}")
 
         # File name
         quality_str = video["size"]
         file_format = video["type"].split("/")[1]
         file_name = f"{series_title} - S{season_str}E{episode_str} - {episode_title} - {quality_str}p.{file_format}"
-        print(f"→ {file_name=}")
+        print(f"→ File name: {file_name}")
 
         outputs.append((file_name, video_url))
 
