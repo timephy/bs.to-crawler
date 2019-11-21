@@ -19,7 +19,6 @@ def get_series_title(html):
 
 def get_episodes(html):
     soup = BeautifulSoup(html, "html.parser")
-
     episodes = soup.find("table", {"class": "episodes"}).find_all("tr")
 
     def episode(tr):
