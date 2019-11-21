@@ -21,9 +21,9 @@ A web crawler that extracts video urls from [bs.to](https://bs.to) in bulk.
 
 ## Attention
 
-Currently only one host ([vivo.sx](https://vivo.sx)) is supported!
+- Currently only one host ([vivo.sx](https://vivo.sx)) is supported!
 
-Hosts like vivo **change** the video URLs frequently, so the links given only stay valid for around a day.
+- Hosts like vivo **change** the video URLs frequently, so the links given only stay valid for around a day.
 
 
 ## How it works
