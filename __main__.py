@@ -128,9 +128,9 @@ def main(season_url):
         print(f"→ Video URL: {video_url}")
 
         # File name
-        quality_str = video["size"]
+        # quality_str = video["size"] # " - {quality_str}p"
         file_format = video["type"].split("/")[1]
-        file_name = f"{series_title} - S{season_str}E{episode_str} - {episode_title} - {quality_str}p.{file_format}"
+        file_name = f"{series_title} - S{season_str}E{episode_str} - {episode_title}.{file_format}"
         print(f"→ File name: {file_name}")
 
         outputs.append((file_name, video_url))
