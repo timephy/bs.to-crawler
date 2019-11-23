@@ -3,6 +3,7 @@ from host import vivo_sx
 import requests
 # import time
 import sys
+import os
 
 from selenium import webdriver
 
@@ -137,6 +138,7 @@ def main(season_url):
 
     # files
     series_dir_name = f"{series_title}"
+    os.makedirs(series_dir_name, exist_ok=True)
 
     # Data to file
     output_file_name = f"{series_title}/S{season_str}.csv"
