@@ -23,8 +23,8 @@ def get_episodes(html):
     episodes = soup.find("table", {"class": "episodes"}).find_all("tr")
 
     def episode(tr):
-        id = tr.find("a").text
-        title = tr.find("strong").text
+        id = tr.find("a").text.strip()
+        title = tr.find("strong").text.strip()
         hosts = list(tr.children)[5]
         hosts = hosts.find_all("a")
         hosts = list(map(
