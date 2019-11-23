@@ -135,8 +135,11 @@ def main(season_url):
 
         outputs.append((file_name, video_url))
 
+    # files
+    series_dir_name = f"{series_title}"
+
     # Data to file
-    output_file_name = f"{series_title} - S{season_str}.csv"
+    output_file_name = f"{series_title}/S{season_str}.csv"
     output_file = open(output_file_name, "w")
     output_file.write(", ".join(("file_name", "video_url")) + "\n")
     for output in outputs:
@@ -144,9 +147,9 @@ def main(season_url):
     output_file.close()
 
     # wget script to file
-    wget_file_name = f"Download {series_title} - S{season_str}.sh"
+    wget_file_name = f"{series_dir_name}/Download S{season_str}.sh"
     wget_file = open(wget_file_name, "w")
-    video_output_dir = f"{series_title}/S{season_str}"
+    video_output_dir = f"{series_dir_name}/S{season_str}"
     wget_file.write(f"mkdir -p \"{video_output_dir}\"\n")
     for output in outputs:
         wget_file.write(
@@ -155,7 +158,7 @@ def main(season_url):
 
     print()
     print(f"→ Data file: {output_file_name}")
-    print(f"→ Download script: {wget_file}")
+    print(f"→ Download script: {wget_file_name}")
     print("Done.")
 
     # raise Exception()
