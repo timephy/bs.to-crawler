@@ -1,12 +1,12 @@
 import bs_to
 from host import vivo_sx
 import requests
-import time
+# import time
 import sys
 
 from selenium import webdriver
 
-SLEEP_TIME = 0.5
+# SLEEP_TIME = 0.5
 SUPPORTED_HOSTS = ["vivo"]
 
 # season_url = input("The URL of the series: ")
@@ -68,7 +68,7 @@ def main(season_url):
     host_coverage = get_host_coverage(episodes)
 
     # Select Host
-    time.sleep(SLEEP_TIME)
+    # time.sleep(SLEEP_TIME)
     print()
     print("Hosts:")
     for host_name, count in host_coverage.items():
@@ -83,7 +83,7 @@ def main(season_url):
 
     # Select host
     selected_host_name = select_host_name(host_coverage.keys())
-    time.sleep(SLEEP_TIME)
+    # time.sleep(SLEEP_TIME)
     print(f"Selected host: {selected_host_name}")
 
     episodes_and_bs_urls_to_get = []
@@ -112,7 +112,7 @@ def main(season_url):
 
     outputs = []
     for episode, bs_url in episodes_and_bs_urls_to_get:
-        time.sleep(SLEEP_TIME)
+        # time.sleep(SLEEP_TIME)
         episode_str = str(episode["id"]).zfill(2)
         episode_title = episode["title"]
         print()
