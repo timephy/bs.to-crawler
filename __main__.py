@@ -22,6 +22,11 @@ assert season_url_parts[2] == "bs.to"
 assert season_url_parts[3] == "serie"
 
 
+def safe_str(str):
+    return str.replace(":", " -").replace("|", "-")
+    # .replace("!", "").replace(";", "")
+
+
 def get_host_coverage(episodes):
     """Returns a dict mapping host_name to count."""
     coverage = {}  # dict(map(lambda host: (host, 0), all_host_names))
@@ -131,13 +136,14 @@ def main(season_url):
         # File name
         # quality_str = video["size"] # " - {quality_str}p"
         file_format = video["type"].split("/")[1]
-        file_name = f"{series_title} - S{season_str}E{episode_str} - {episode_title}.{file_format}"
+        file_name = safe_str(
+            f"{series_title} - S{season_str}E{episode_str} - {episode_title}.{file_format}")
         print(f"→ File name: {file_name}")
 
         outputs.append((file_name, video_url))
 
     # files
-    series_dir_name = f"{series_title}"
+    series_dir_name = safe_str(series_title)
     os.makedirs(series_dir_name, exist_ok=True)
 
     # Data to file
