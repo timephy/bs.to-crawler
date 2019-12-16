@@ -161,7 +161,7 @@ def main(season_url):
     wget_file.write(f"mkdir -p \"{video_output_dir}\"\n")
     for output in outputs:
         wget_file.write(
-            f"wget {output[1]} -O \"{video_output_dir}/{output[0]}\"" + "\n")
+            f"wget --no-check-certificate {output[1]} -O \"{video_output_dir}/{output[0]}\"" + "\n")
     wget_file.close()
 
     print()
