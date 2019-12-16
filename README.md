@@ -25,7 +25,7 @@ A web crawler that extracts video urls from [bs.to](https://bs.to) in bulk.
 
 - Hosts like vivo **change** the video URLs frequently, so the links given only stay valid for a few hours.
 
-- **Windows users**: Please user `PowerShell` instead of `cmd`!
+- **Windows users**: Please user `Git Bash`/`PowerShell` instead of `cmd`!
 
 
 ## How it works
