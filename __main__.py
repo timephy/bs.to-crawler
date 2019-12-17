@@ -4,6 +4,7 @@ import requests
 # import time
 import sys
 import os
+import functools
 
 from selenium import webdriver
 
@@ -36,6 +37,35 @@ def get_host_coverage(episodes):
                 coverage[host[0]] = 0
             coverage[host[0]] += 1
     return coverage
+
+
+def ForceSuccess(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        while True:
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                print(e)
+    return wrapper
+
+
+@ForceSuccess
+def select_episode_range(episodes):
+    print("""(Press enter for all episodes, "1,2,4,..." for selected episodes, "2-5" for a range of episodes)""")
+    inp = input("> Set episode range: ").strip()
+    if inp == "":
+        return [ep["id"] for ep in episodes]
+    elif "-" in inp:
+        range_parts = inp.split("-")
+        if len(range_parts) != 2:
+            raise Exception("""Range not in corrent format ("2-5").""")
+        if not all([str.isdigit(p) for p in range_parts]):
+            raise Exception("Range argument is not an integer.")
+        # include last episode
+        return [str(i) for i in range(int(range_parts[0]), int(range_parts[1]) + 1)]
+    else:
+        return [s.strip() for s in inp.split(",")]
 
 
 def select_host_name(host_names):
@@ -87,6 +117,9 @@ def main(season_url):
     print(f"(Please file an issue on GitHub about support for more hosts)")
     print()
 
+    # Select episode range
+    episode_range = select_episode_range(episodes)
+
     # Select host
     selected_host_name = select_host_name(host_coverage.keys())
     # time.sleep(SLEEP_TIME)
@@ -95,10 +128,14 @@ def main(season_url):
     episodes_and_bs_urls_to_get = []
     for episode in episodes:
         hosts = dict(episode["hosts"])
-        if selected_host_name in hosts:
+        if episode["id"] in episode_range and selected_host_name in hosts:
             bs_url = hosts[selected_host_name]
             if bs_url is not None:
                 episodes_and_bs_urls_to_get.append((episode, bs_url))
+
+    if len(episodes_and_bs_urls_to_get) == 0:
+        print("Nothing to do.")
+        return
 
     # Browser
     """
