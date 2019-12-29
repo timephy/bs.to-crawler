@@ -3,7 +3,7 @@ A web crawler that extracts video urls from [bs.to](https://bs.to) in bulk.
 
 ## Attention - This project does not work in the current state
 
-bs.to regocnized automation since javascript property `navigator.webdriver` is set to `true`.
+bs.to recognizes automation since javascript property `navigator.webdriver` is set to `true`.
 Overriding this property with javascript code (e.g. Object.defineProperty) does sort of work, but then one would have to solve an near infinite amount of CAPTCHAs.
 
 There **is** a [possible fix](https://stackoverflow.com/questions/42169488/how-to-make-chromedriver-undetectable)
